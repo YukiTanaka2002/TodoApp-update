@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="&apos;spring-mvc.xml&apos; を &apos;config&apos; に移動" description="&apos;spring-mvc.xml&apos; を &apos;config&apos; に移動" destination="src/main/resources/config" element1="src/main/java/com/tanaka/controller/spring-mvc.xml" flags="7" id="org.eclipse.ltk.core.refactoring.move.resources" resources="1" stamp="1731814065480" updateReferences="true"/>
+</session>

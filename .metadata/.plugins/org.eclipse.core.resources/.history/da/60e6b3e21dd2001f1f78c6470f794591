@@ -1,0 +1,51 @@
+package com.tanaka.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.tanaka.model.Todo;
+import com.tanaka.service.TodoService;
+
+@Controller
+public class TodoController {
+
+    @Autowired
+    private TodoService todoService;
+
+    // "/" にアクセスした場合、タスクリストを表示
+    @GetMapping("/")
+    public String getTodoList(Model model) {
+        List<Todo> todos = todoService.getTodoList();
+        model.addAttribute("todos", todos);
+        return "todo"; // "todoList.html" を返す
+    }
+
+    // 新しいタスクを追加
+    @PostMapping("/todos")
+    public String addTodo(@RequestParam("taskDescription") String taskDescription) {
+        todoService.addTodo(taskDescription);
+        return "redirect:/"; // タスク追加後にトップページ（"/"）にリダイレクト
+    }
+
+    // タスクを編集
+    @PostMapping("/todos/edit/{id}")
+    public String editTodo(@PathVariable("id") int id, @RequestParam("taskDescription") String taskDescription) {
+        todoService.updateTodo(id, taskDescription);
+        return "redirect:/"; // 編集後にトップページにリダイレクト
+    }
+
+    // タスクを削除
+    @GetMapping("/delete/{id}")
+    public String deleteTodo(@PathVariable("id") int id) {
+        todoService.deleteTodo(id);
+        return "redirect:/"; // 削除後にトップページにリダイレクト
+    }
+}
+

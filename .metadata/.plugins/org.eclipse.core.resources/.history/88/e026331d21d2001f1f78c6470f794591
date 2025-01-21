@@ -1,0 +1,67 @@
+package com.tanaka.dao;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
+
+import com.tanaka.model.Todo;
+
+@Repository
+public class TodoDao {
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+    // タスクのリストを取得
+    public List<Todo> getTodoList() {
+        String sql = "SELECT id, task, completed FROM tasks";
+
+        RowMapper<Todo> rowMapper = (rs, rowNum) -> {
+            Todo todo = new Todo();
+            todo.setId(rs.getInt("id"));
+            todo.setTask(rs.getString("task"));
+            todo.setCompleted(rs.getBoolean("completed"));
+            return todo;
+        };
+
+        return jdbcTemplate.query(sql, rowMapper);
+    }
+
+    // タスクを追加
+    public void addTodo(String taskDescription) {
+        String sql = "INSERT INTO tasks (task, completed) VALUES (?, ?)";
+        jdbcTemplate.update(sql, taskDescription, false); // completedはデフォルトでfalse
+    }
+
+    // タスクを削除
+    public void deleteTodo(int id) {
+        String sql = "DELETE FROM tasks WHERE id = ?";
+        jdbcTemplate.update(sql, id);
+    }
+
+    // タスクをIDで取得
+    public Todo getTodoById(int id) {
+        String sql = "SELECT id, task, completed FROM tasks WHERE id = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{id}, new RowMapper<Todo>() {
+            @Override
+            public Todo mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Todo todo = new Todo();
+                todo.setId(rs.getInt("id"));
+                todo.setTask(rs.getString("task"));
+                todo.setCompleted(rs.getBoolean("completed"));
+                return todo;
+            }
+        });
+    }
+
+    // タスクを更新
+    public void updateTodo(int id, String taskDescription, boolean completed) {
+        String sql = "UPDATE tasks SET task = ?, completed = ? WHERE id = ?";
+        jdbcTemplate.update(sql, taskDescription, completed, id);
+    }
+}

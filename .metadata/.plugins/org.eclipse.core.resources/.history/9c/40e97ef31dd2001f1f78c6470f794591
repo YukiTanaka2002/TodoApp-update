@@ -1,0 +1,51 @@
+package com.tanaka.dao;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
+
+import com.tanaka.model.Todo;
+
+@Repository
+public class TodoDao {
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+    // todoListの取得
+    public List<Todo> getTodoList() {
+        String sql = "SELECT id, task, completed FROM tasks";
+
+        RowMapper<Todo> rowMapper = (rs, rowNum) -> {
+            Todo todo = new Todo();
+            todo.setId(rs.getInt("id"));
+            todo.setTask(rs.getString("task"));
+            todo.setCompleted(rs.getBoolean("completed"));
+            return todo;
+        };
+
+        return jdbcTemplate.query(sql, rowMapper);
+    }
+
+    // todoListの追加
+    public void addTodo(String taskDescription) {
+        String sql = "INSERT INTO tasks (task, completed) VALUES (?, ?)";
+        jdbcTemplate.update(sql, taskDescription, false);
+    }
+
+    // タスクの更新
+    public void updateTodo(int id, String taskDescription) {
+        String sql = "UPDATE tasks SET task = ? WHERE id = ?";
+        jdbcTemplate.update(sql, taskDescription, id);
+    }
+
+    // タスクの削除
+    public void deleteTodo(int id) {
+        String sql = "DELETE FROM tasks WHERE id = ?";
+        jdbcTemplate.update(sql, id);
+    }
+}
+

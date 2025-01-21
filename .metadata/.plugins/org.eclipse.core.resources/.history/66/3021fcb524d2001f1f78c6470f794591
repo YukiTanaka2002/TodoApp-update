@@ -1,0 +1,77 @@
+package com.tanaka.dao;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
+
+import com.tanaka.model.Todo;
+
+@Repository
+public class TodoDao {
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+    // todoListの取得
+    public List<Todo> getTodoList() {
+        String sql = "SELECT id, task, completed FROM tasks";
+
+        // RowMapperを使って結果をTodoオブジェクトにマッピング
+        RowMapper<Todo> rowMapper = (rs, rowNum) -> {
+            Todo todo = new Todo();
+            todo.setId(rs.getInt("id"));
+            todo.setTask(rs.getString("task"));
+            todo.setCompleted(rs.getBoolean("completed"));
+            return todo;
+        };
+
+        // jdbcTemplate.queryを使ってリストを返す
+        return jdbcTemplate.query(sql, rowMapper);
+    }
+    
+ // 完了したタスクのみを取得
+    public List<Todo> getCompletedTodoList() {
+        String sql = "SELECT id, task, completed FROM tasks WHERE completed = true";
+
+        RowMapper<Todo> rowMapper = (rs, rowNum) -> {
+            Todo todo = new Todo();
+            todo.setId(rs.getInt("id"));
+            todo.setTask(rs.getString("task"));
+            todo.setCompleted(rs.getBoolean("completed"));
+            return todo;
+        };
+
+        return jdbcTemplate.query(sql, rowMapper);
+    }
+
+
+    // todoListの追加
+    public void addTodo(String taskDescription) {
+        // 新しいタスクを追加するSQL
+        String sql = "INSERT INTO tasks (task, completed) VALUES (?, ?)";
+
+        // jdbcTemplate.updateを使ってデータベースに追加
+        jdbcTemplate.update(sql, taskDescription, false); // デフォルトでcompletedはfalse
+    }
+
+ // タスクを完了にする
+    public void completeTodo(int id) {
+        String sql = "UPDATE tasks SET completed = ? WHERE id = ?";
+        jdbcTemplate.update(sql, true, id);  // 完了状態に更新
+    }
+
+    // Todoを削除
+    public void deleteTodo(int id) {
+        String sql = "DELETE FROM tasks WHERE id = ?";
+        jdbcTemplate.update(sql, id);
+    }
+
+    // Todoを更新（編集）
+    public void updateTodo(int id, String taskDescription, boolean completed) {
+        String sql = "UPDATE tasks SET task = ?, completed = ? WHERE id = ?";
+        jdbcTemplate.update(sql, taskDescription, completed, id);
+    }
+}

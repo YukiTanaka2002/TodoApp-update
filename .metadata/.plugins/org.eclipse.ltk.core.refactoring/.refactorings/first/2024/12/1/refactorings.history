@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="リソース名 &apos;first/src/main/webapp/WEB-INF/views/createDiary.jsp&apos; を &apos;list.jsp&apos; に変更します" description="リソース &apos;createDiary.jsp&apos; の名前変更" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/webapp/WEB-INF/views/createDiary.jsp" name="list.jsp" stamp="1735439540603" updateReferences="true"/>
+</session>

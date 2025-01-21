@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>編集 - Todo List</title>
+</head>
+<body>
+    <h1>タスク編集</h1>
+
+    <form action="/edit" method="post">
+        <input type="hidden" name="id" th:value="${todo.id}" />
+        
+        <label for="taskDescription">タスク:</label>
+        <input type="text" id="taskDescription" name="taskDescription" th:value="${todo.task}" required />
+
+        <label for="completed">完了:</label>
+        <input type="checkbox" id="completed" name="completed" th:checked="${todo.completed}" />
+
+        <button type="submit">更新</button>
+    </form>
+
+    <a href="/">戻る</a>
+</body>
+</html>

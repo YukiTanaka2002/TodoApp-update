@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 80%;
+            max-width: 600px;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            width: 80%;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            background-color: #f9f9f9;
+            margin: 8px 0;
+            padding: 10px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .edit-input {
+            display: none;
+            margin-bottom: 10px;
+            width: 70%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Todo List</h1>
+
+        <!-- タスクの追加フォーム -->
+        <form action="/todos" method="post">
+            <input type="text" id="taskDescription" name="taskDescription" required placeholder="新しいタスク">
+            <button type="submit">タスクを追加</button>
+        </form>
+
+        <h2>タスク一覧</h2>
+        <ul>
+            <!-- タスクのリストを表示 -->
+            <li th:each="todo : ${todos}">
+                <span class="task-text" th:text="${todo.task}">Task</span>
+                
+                <input class="edit-input" type="text" th:value="${todo.task}" id="editTask_${todo.id}" />
+
+                <button class="edit-btn" onclick="editTask(${todo.id})">編集</button>
+                <button class="update-btn" id="update_${todo.id}" onclick="updateTask(${todo.id})" style="display:none;">更新</button>
+                <span th:text="${todo.completed ? '完了' : '未完了'}">Status</span>
+
+                <div>
+                    <!-- タスクを削除するボタン -->
+                    <a th:href="@{/delete(id=${todo.id})}">削除</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        // 編集ボタンをクリックした時に、入力欄を表示して編集状態にする関数
+        function editTask(todoId) {
+            var taskText = document.querySelector(`#task_${todoId}`);
+            var editInput = document.querySelector(`#editTask_${todoId}`);
+            var editBtn = document.querySelector(`#editBtn_${todoId}`);
+            var updateBtn = document.querySelector(`#update_${todoId}`);
+
+            // 編集フィールドを表示して、タスクのテキストを入力欄にセット
+            taskText.style.display = 'none';
+            editInput.style.display = 'inline-block';
+            updateBtn.style.display = 'inline-block';
+            editBtn.style.display = 'none';
+        }
+
+        // 更新ボタンをクリックした時に、更新した内容をサーバーに送信する関数
+        function updateTask(todoId) {
+            var editInput = document.querySelector(`#editTask_${todoId}`);
+            var updatedTask = editInput.value;
+
+            // サーバーに更新内容を送信する（ここでは例として、更新後の内容をコンソールに表示）
+            // ここに実際の更新リクエストを追加することができます。
+
+            // 更新後、編集を終了し、表示に戻す
+            var taskText = document.querySelector(`#task_${todoId}`);
+            taskText.innerText = updatedTask;
+            taskText.style.display = 'inline-block';
+            editInput.style.display = 'none';
+            document.querySelector(`#update_${todoId}`).style.display = 'none';
+            document.querySelector(`#editBtn_${todoId}`).style.display = 'inline-block';
+        }
+    </script>
+
+</body>
+</html>

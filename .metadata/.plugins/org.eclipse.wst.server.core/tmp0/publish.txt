@@ -1,0 +1,4 @@
+#Tomcat publish data
+#Sat Jan 18 10:42:24 JST 2025
+org.eclipse.jst.jee.server\:/binary\:C\:\\Users\\yuki.tanaka\\.m2\\repository\\org\\springframework\\spring-web\\5.2.4.RELEASE\\spring-web-5.2.4.RELEASE.jar=WEB-INF/lib/spring-web-5.2.4.RELEASE.jar
+org.eclipse.jst.jee.server\:/binary\:C\:\\Users\\yuki.tanaka\\.m2\\repository\\org\\springframework\\spring-web\\6.0.0\\spring-web-6.0.0.jar=WEB-INF/lib/spring-web-6.0.0.jar

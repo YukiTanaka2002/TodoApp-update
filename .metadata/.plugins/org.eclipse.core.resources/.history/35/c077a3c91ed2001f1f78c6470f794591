@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 80%;
+            max-width: 600px;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            width: 80%;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            background-color: #f9f9f9;
+            margin: 8px 0;
+            padding: 10px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .edit-input {
+            display: none;
+            margin-bottom: 10px;
+            width: 70%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Todo List</h1>
+
+        <!-- タスクの追加フォーム -->
+        <form action="/todos" method="post">
+            <input type="text" id="taskDescription" name="taskDescription" required placeholder="新しいタスク">
+            <button type="submit">タスクを追加</button>
+        </form>
+
+        <h2>タスク一覧</h2>
+        <ul>
+            <!-- タスクのリストを表示 -->
+            <li th:each="todo : ${todos}">
+                <!-- タスクテキスト -->
+                <span class="task-text" th:text="${todo.task}" id="task_${todo.id}">Task</span>
+
+                <!-- 編集用入力フィールド -->
+                <input class="edit-input" type="text" th:value="${todo.task}" id="editTask_${todo.id}" />
+
+                <!-- 編集ボタン -->
+                <button onclick="editTask(${todo.id})" id="editBtn_${todo.id}">編集</button>
+
+                <!-- 更新ボタン -->
+                <button onclick="updateTask(${todo.id})" id="updateBtn_${todo.id}" style="display:none;">更新</button>
+
+                <span th:text="${todo.completed ? '完了' : '未完了'}">Status</span>
+
+                <!-- 削除リンク -->
+                <a th:href="@{/delete(id=${todo.id})}">削除</a>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+       
+    </script>
+
+</body>
+</html>

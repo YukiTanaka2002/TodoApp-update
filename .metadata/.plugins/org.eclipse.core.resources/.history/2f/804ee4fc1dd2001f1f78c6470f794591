@@ -1,0 +1,21 @@
+@Service
+public class TodoService {
+
+    @Autowired
+    private TodoDao todoDao;
+
+    // タスクのリストを取得
+    public List<Todo> getTodoList() {
+        return todoDao.getTodoList();
+    }
+
+    // タスクを追加
+    public void addTodo(String taskDescription) {
+        todoDao.addTodo(taskDescription);
+    }
+
+    // タスクを更新
+    public void updateTodo(int id, String taskDescription) {
+        todoDao.updateTodo(id, taskDescription);
+    }
+}

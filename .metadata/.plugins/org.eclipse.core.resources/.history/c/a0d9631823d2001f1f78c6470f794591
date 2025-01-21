@@ -1,0 +1,70 @@
+package com.tanaka.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.tanaka.model.Todo;
+import com.tanaka.service.TodoService;
+
+@Controller
+public class TodoController {
+
+    @Autowired
+    private TodoService todoService;
+
+    // "/" にアクセスした場合、タスクリストを表示
+    @GetMapping("/")
+    public String getTodoList(Model model) {
+        List<Todo> todos = todoService.getTodoList();
+        model.addAttribute("todos", todos);
+        return "todo"; // "todoList.html" を返す
+    }
+
+    // 新しいタスクを追加
+    @PostMapping("/todos")
+    public String addTodo(@RequestParam("taskDescription") String taskDescription) {
+        todoService.addTodo(taskDescription);
+        return "redirect:/"; // タスク追加後にトップページ（"/"）にリダイレクト
+    }
+    
+ // タスクの完了
+    @RequestMapping("/complete")
+    public String completeTodo(@RequestParam("id") int id) {
+        todoService.completeTodo(id);  // 完了状態を更新するサービスメソッド
+        return "redirect:/";  // 完了後にトップページにリダイレクト
+    }
+
+
+    // タスクを削除
+    @RequestMapping("/delete")
+    public String deleteTodo(@RequestParam("id") int id) {
+        todoService.deleteTodo(id);
+        return "redirect:/"; // タスク削除後にトップページ（"/"）にリダイレクト
+    }
+
+    // タスクを編集
+    @GetMapping("/edit")
+    public String editTodoForm(@RequestParam("id") int id, Model model) {
+        Todo todo = todoService.getTodoList().stream()
+                .filter(t -> t.getId() == id)
+                .findFirst()
+                .orElse(null);
+        model.addAttribute("todo", todo);
+        return "edit"; // 編集フォームを表示
+    }
+
+    @PostMapping("/edit")
+    public String editTodo(@RequestParam("id") int id,
+                            @RequestParam("taskDescription") String taskDescription,
+                            @RequestParam("completed") boolean completed) {
+        todoService.updateTodo(id, taskDescription, completed);
+        return "redirect:/"; // タスク編集後にトップページ（"/"）にリダイレクト
+    }
+}

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="リソース &apos;first/src/main/resources/config/spring.xml&apos; を削除" deleteContents="false" description="リソース &apos;first/src/main/resources/config/spring.xml&apos; を削除" element1="/first/src/main/resources/config/spring.xml" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1731812916314"/>
+</session>

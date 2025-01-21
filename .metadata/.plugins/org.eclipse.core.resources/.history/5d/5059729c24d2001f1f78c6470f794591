@@ -1,0 +1,3 @@
+public void deleteCompletedTodos() {
+    todoDao.deleteCompletedTodos(); // 完了タスクを削除
+}

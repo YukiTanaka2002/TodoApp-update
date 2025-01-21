@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="リソース名 &apos;first/src/main/webapp/WEB-INF/templates/login.html&apos; を &apos;edit.html&apos; に変更します" description="リソース &apos;login.html&apos; の名前変更" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/webapp/WEB-INF/templates/login.html" name="edit.html" stamp="1736822102563" updateReferences="true"/>
+</session>
