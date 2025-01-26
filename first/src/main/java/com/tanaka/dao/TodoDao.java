@@ -32,7 +32,7 @@ public class TodoDao {
         return jdbcTemplate.query(sql, rowMapper);
     }
     
- // 完了したタスクのみを取得
+    // 完了したタスクのみを取得
     public List<Todo> getCompletedTodoList() {
         String sql = "SELECT id, task, completed FROM tasks WHERE completed = true";
 
@@ -47,7 +47,6 @@ public class TodoDao {
         return jdbcTemplate.query(sql, rowMapper);
     }
 
-
     // todoListの追加
     public void addTodo(String taskDescription) {
         // 新しいタスクを追加するSQL
@@ -57,29 +56,31 @@ public class TodoDao {
         jdbcTemplate.update(sql, taskDescription, false); // デフォルトでcompletedはfalse
     }
 
- // Todoを完了にする
-    public void completeTodo(int id) {
-        String sql = "UPDATE tasks SET completed = ? WHERE id = ?";
-        jdbcTemplate.update(sql, true, id);  // 完了状態に更新
+ // タスクを完了にする
+    public void completeTodoByDescription(String taskDescription) {
+        String sql = "UPDATE tasks SET completed = true WHERE task = ?";
+        jdbcTemplate.update(sql, taskDescription);  // タスク内容で完了状態を更新
     }
 
-    // Todoを削除
-    public void deleteTodo(int id) {
-        String sql = "DELETE FROM tasks WHERE id = ?";
-        jdbcTemplate.update(sql, id);
+    // タスクを削除する
+    public void deleteTodoByDescription(String taskDescription) {
+        String sql = "DELETE FROM tasks WHERE task = ?";
+        jdbcTemplate.update(sql, taskDescription);  // タスク内容で削除
     }
+
+    // タスクを編集する
+    public void updateTodoByDescription(String taskDescription, String newTaskDescription) {
+        String sql = "UPDATE tasks SET task = ? WHERE task = ?";
+        jdbcTemplate.update(sql, newTaskDescription, taskDescription);  // タスク内容で更新
+    }
+
+
     
     // 完了Todoを削除
     public void deleteCompletedTodos() {
         // 完了タスクを削除するSQL
         String sql = "DELETE FROM tasks WHERE completed = true";
         jdbcTemplate.update(sql);
-    }
-
-
-    public void updateTodo(int id, String taskDescription) {
-        String sql = "UPDATE tasks SET task = ? WHERE id = ?";
-        jdbcTemplate.update(sql, taskDescription, id);
     }
 
 }

@@ -1,0 +1,50 @@
+package com.tanaka.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.tanaka.model.Todo;
+
+@Service
+public class TodoService {
+
+    @Autowired
+    private TodoDao todoDao;
+
+    // タスクのリストを取得
+    public List<Todo> getTodoList() {
+        return todoDao.getTodoList(); // Dao層でタスクのリストを取得
+    }
+    
+    // 完了したタスクを取得
+    public List<Todo> getCompletedTodoList() {
+        return todoDao.getCompletedTodoList();  // Dao層で完了したタスクを取得
+    }
+
+    // タスクを追加
+    public void addTodo(String taskDescription) {
+        todoDao.addTodo(taskDescription);  // Dao層で新しいタスクを追加
+    }
+    
+    // タスクを完了
+    public void completeTodo(int id) {
+        todoDao.completeTodo(id);  // Dao層でタスクの完了状態を更新
+    }
+
+    // タスクを削除
+    public void deleteTodo(int id) {
+        todoDao.deleteTodo(id);  // Dao層で指定したタスクを削除
+    }
+
+    // 完了タスクを削除
+    public void deleteCompletedTodos() {
+        todoDao.deleteCompletedTodos(); // Dao層で完了タスクを削除
+    }
+
+    // タスクを編集
+    public void updateTodo(int id, String taskDescription) {
+        todoDao.updateTodo(id, taskDescription);  // Dao層でタスクの内容を更新
+    }
+}

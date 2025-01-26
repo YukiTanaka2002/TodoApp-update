@@ -30,25 +30,26 @@ public class TodoService {
         todoDao.addTodo(taskDescription);
     }
     
-    // タスクを完了
-    public void completeTodo(int id) {
-        todoDao.completeTodo(id);  // Dao層で完了状態を更新する
+ // タスクを完了にする
+    public void completeTodoByDescription(String taskDescription) {
+        todoDao.completeTodoByDescription(taskDescription);  // Dao層で完了処理
+    }
+
+    // タスクを削除する
+    public void deleteTodoByDescription(String taskDescription) {
+        todoDao.deleteTodoByDescription(taskDescription);  // Dao層で削除処理
+    }
+
+    // タスクを編集する
+    public void updateTodoByDescription(String taskDescription, String newTaskDescription) {
+        todoDao.updateTodoByDescription(taskDescription, newTaskDescription);  // Dao層で編集処理
     }
 
 
-    // タスクを削除
-    public void deleteTodo(int id) {
-        todoDao.deleteTodo(id);
-    }
 
  // 完了タスクを削除
     public void deleteCompletedTodos() {
         todoDao.deleteCompletedTodos(); // 完了タスクを削除
     }
 
-    
-    // タスクを編集
-    public void updateTodo(int id, String taskDescription) {
-        todoDao.updateTodo(id, taskDescription);
-    }
 }

@@ -3719,3 +3719,119 @@ org.eclipse.core.runtime.CoreException: Could not resolve artifact mysql:mysql-c
 2025-01-21 14:38:46,738 [Worker-18: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2025-01-21 14:38:46,739 [Worker-18: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
 2025-01-21 14:42:47,659 [main] WARN  org.eclipse.jgit.lib.Repository - close() called when useCnt is already zero for Repository[C:\.git]
+2025-01-23 20:11:25,336 [Worker-4: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2025-01-23 20:11:27,971 [Worker-7: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-23 20:11:27,977 [Worker-7: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 3 resources
+2025-01-23 20:11:27,983 [Worker-7: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-23 20:11:27,984 [Worker-7: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2025-01-24 19:36:06,237 [Worker-1: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2025-01-24 19:45:28,763 [Worker-6: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-24 19:45:28,769 [Worker-6: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 3 resources
+2025-01-24 19:45:28,777 [Worker-6: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-24 19:45:28,778 [Worker-6: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2025-01-26 21:38:01,227 [Worker-41: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 21:38:01,231 [Worker-41: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2025-01-26 21:38:01,234 [Worker-41: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 21:38:01,234 [Worker-41: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2025-01-26 21:39:07,217 [Worker-45: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 21:39:07,217 [Worker-45: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2025-01-26 21:39:07,221 [Worker-45: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 21:39:07,221 [Worker-45: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2025-01-26 21:40:53,303 [Worker-46: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 21:40:53,332 [Worker-46: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 3 resources
+2025-01-26 21:40:53,336 [Worker-46: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 21:40:53,336 [Worker-46: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2025-01-26 21:42:29,118 [Worker-48: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 21:42:29,119 [Worker-48: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 3 resources
+2025-01-26 21:42:29,121 [Worker-48: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 21:42:29,121 [Worker-48: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2025-01-26 21:43:07,618 [Worker-42: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 21:43:07,619 [Worker-42: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 3 resources
+2025-01-26 21:43:07,627 [Worker-42: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 21:43:07,628 [Worker-42: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2025-01-26 21:43:11,558 [Worker-39: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 21:43:11,559 [Worker-39: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 3 resources
+2025-01-26 21:43:11,564 [Worker-39: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 21:43:11,564 [Worker-39: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2025-01-26 21:43:14,796 [Worker-46: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 21:43:14,797 [Worker-46: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 3 resources
+2025-01-26 21:43:14,799 [Worker-46: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 21:43:14,799 [Worker-46: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2025-01-26 21:47:13,063 [Worker-17: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 21:47:13,064 [Worker-17: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 3 resources
+2025-01-26 21:47:13,065 [Worker-17: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 21:47:13,065 [Worker-17: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2025-01-26 21:48:01,426 [Worker-43: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 21:48:01,427 [Worker-43: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 3 resources
+2025-01-26 21:48:01,429 [Worker-43: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 21:48:01,429 [Worker-43: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2025-01-26 21:48:24,284 [Worker-52: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 21:48:24,285 [Worker-52: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 3 resources
+2025-01-26 21:48:24,287 [Worker-52: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 21:48:24,287 [Worker-52: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2025-01-26 21:48:54,400 [Worker-17: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 21:48:54,401 [Worker-17: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 3 resources
+2025-01-26 21:48:54,403 [Worker-17: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 21:48:54,403 [Worker-17: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2025-01-26 21:49:04,978 [Worker-51: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 21:49:04,979 [Worker-51: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 3 resources
+2025-01-26 21:49:04,981 [Worker-51: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 21:49:04,981 [Worker-51: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2025-01-26 21:49:16,071 [Worker-53: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 21:49:16,071 [Worker-53: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 3 resources
+2025-01-26 21:49:16,074 [Worker-53: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 21:49:16,074 [Worker-53: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2025-01-26 21:50:51,082 [Worker-43: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 21:50:51,083 [Worker-43: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 3 resources
+2025-01-26 21:50:51,084 [Worker-43: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 21:50:51,085 [Worker-43: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2025-01-26 21:51:00,199 [Worker-52: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 21:51:00,200 [Worker-52: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 3 resources
+2025-01-26 21:51:00,203 [Worker-52: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 21:51:00,203 [Worker-52: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2025-01-26 21:51:04,659 [Worker-17: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 21:51:04,660 [Worker-17: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 3 resources
+2025-01-26 21:51:04,663 [Worker-17: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 21:51:04,663 [Worker-17: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2025-01-26 21:51:21,616 [Worker-53: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 21:51:21,617 [Worker-53: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 3 resources
+2025-01-26 21:51:21,618 [Worker-53: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 21:51:21,618 [Worker-53: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2025-01-26 21:51:37,306 [Worker-53: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 21:51:37,307 [Worker-53: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 3 resources
+2025-01-26 21:51:37,309 [Worker-53: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 21:51:37,310 [Worker-53: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2025-01-26 21:51:47,857 [Worker-17: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 21:51:47,858 [Worker-17: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 3 resources
+2025-01-26 21:51:47,860 [Worker-17: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 21:51:47,860 [Worker-17: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2025-01-26 21:56:27,898 [Worker-43: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 21:56:27,898 [Worker-43: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2025-01-26 21:56:27,900 [Worker-43: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 21:56:27,900 [Worker-43: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2025-01-26 21:58:06,212 [Worker-17: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 21:58:06,213 [Worker-17: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2025-01-26 21:58:06,216 [Worker-17: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 21:58:06,216 [Worker-17: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2025-01-26 21:59:34,492 [Worker-55: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 21:59:34,493 [Worker-55: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2025-01-26 21:59:34,496 [Worker-55: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 21:59:34,496 [Worker-55: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2025-01-26 22:05:04,948 [Worker-60: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 22:05:04,948 [Worker-60: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2025-01-26 22:05:04,952 [Worker-60: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 22:05:04,953 [Worker-60: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2025-01-26 22:06:32,925 [Worker-56: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 22:06:32,926 [Worker-56: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2025-01-26 22:06:32,928 [Worker-56: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 22:06:32,929 [Worker-56: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2025-01-26 22:07:25,231 [Worker-58: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 22:07:25,232 [Worker-58: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2025-01-26 22:07:25,235 [Worker-58: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 22:07:25,236 [Worker-58: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2025-01-26 22:09:45,541 [Worker-60: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 22:09:45,541 [Worker-60: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2025-01-26 22:09:45,543 [Worker-60: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 22:09:45,544 [Worker-60: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2025-01-26 22:11:00,492 [Worker-67: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-01-26 22:11:00,492 [Worker-67: ビルド] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource

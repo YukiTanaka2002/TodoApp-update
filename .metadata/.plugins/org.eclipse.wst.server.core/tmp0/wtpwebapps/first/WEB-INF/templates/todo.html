@@ -169,14 +169,26 @@
             <li th:each="todo : ${todos}">
                 <span th:text="${todo.task}">Task</span>
                 <div class="button-group">
-                    <!-- タスクを完了するボタン -->
-                    <a th:href="@{/complete(id=${todo.id})}" class="complete-button">完了</a>
-                    
-                    <!-- タスクを削除するボタン -->
-                    <a th:href="@{/delete(id=${todo.id})}">削除</a>
+        <!-- タスクを完了するボタン (formで送信) -->
+			<form th:action="@{/complete}" method="post">
+    		<input type="hidden" name="id" th:value="${todo.id}" />
+   			 <input type="hidden" name="taskDescription" th:value="${todo.task}" />
+   			 <button type="submit" class="complete-button">完了</button>
+			</form>
 
-                    <!-- タスクを編集するリンク -->
-                    <a th:href="@{/edit(id=${todo.id})}">編集</a>
+                    <!-- タスクを削除するボタン (formで送信) -->
+			<form th:action="@{/delete(id=${todo.id})}" method="post" style="display: inline;">
+    		<input type="hidden" name="taskDescription" th:value="${todo.task}" />
+    		<input type="hidden" name="_method" value="delete" />
+    		<button type="submit" class="delete-button">削除</button>
+			</form>
+
+<!-- タスクを編集するリンク (GETリクエスト) -->
+			<form th:action="@{/edit(id=${todo.id})}" method="get" style="display: inline;">
+    			<input type="hidden" name="taskDescription" th:value="${todo.task}" />
+    			<button type="submit" class="edit-button">編集</button>
+			</form>
+
                 </div>
             </li>
         </ul>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>TODOリスト</title>
+    <style>
+        /* スタイルはそのまま */
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>TODOリスト</h1>
+
+        <!-- タスクの追加フォーム -->
+        <form action="/todos" method="post">
+            <input type="text" id="taskDescription" name="taskDescription" required placeholder="新しいタスク">
+            <button type="submit">タスクを追加</button>
+        </form>
+
+        <a href="/completed">完了したタスクを見る</a>
+
+        <h2>タスク一覧</h2>
+        <ul>
+            <!-- タスクのリストを表示 -->
+            <li th:each="todo : ${todos}">
+                <span th:text="${todo.task}">Task</span>
+                <div class="button-group">
+                    <!-- タスクを完了するボタン (formで送信) -->
+                    <form th:action="@{/complete(id=${todo.id})}" method="post">
+                        <button type="submit" class="complete-button">完了</button>
+                    </form>
+
+                    <!-- タスクを削除するボタン (formで送信) -->
+                    <form th:action="@{/delete(id=${todo.id})}" method="post" style="display: inline;">
+                        <input type="hidden" name="_method" value="delete" />
+                        <button type="submit" class="delete-button">削除</button>
+                    </form>
+
+                    <!-- タスクを編集するリンク (GETリクエスト) -->
+                    <form th:action="@{/edit(id=${todo.id})}" method="get" style="display: inline;">
+                        <button type="submit" class="edit-button">編集</button>
+                    </form>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+</body>
+</html>
