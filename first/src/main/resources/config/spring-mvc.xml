@@ -8,6 +8,12 @@
 
     <!-- Spring MVC の機能を使うことを宣言 -->
     <mvc:annotation-driven />
+    
+    <!-- JSフォルダ -->
+    <mvc:resources mapping="/js/**" location="/js/" />
+    
+    <!-- CSSフォルダ -->
+    <mvc:resources mapping="/css/**" location="/css/" />
 
     <!-- コンポーネントスキャンの設定 -->
     <context:component-scan base-package="com.tanaka" />

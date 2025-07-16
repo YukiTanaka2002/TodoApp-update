@@ -1,6 +1,6 @@
 package com.tanaka.model;
 
-public class Todo {
+public class todoForm {
 
 	/** ID */
     private int id;

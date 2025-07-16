@@ -1,64 +1,93 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    padding: 0;
-    background-color: #f9f9f9;
+  font-family: "Arial", sans-serif;
+  background: #fff7f0; /* 明るいオレンジベージュ */
+  margin: 0;
+  padding: 20px;
 }
 
-h1, h2 {
-    color: #333;
+/* ヘッダー部分 */
+.header {
+  background-color: #ff6f61;
+  color: white; /* ここ重要！ */
+  padding: 20px 30px; /* 左右に少し余白をつけるとバランス◎ */
+  text-align: left;   /* ← これがポイント！中央→左へ */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+  border-bottom: 5px solid #ffd166;
+  border-radius: 0 0 12px 12px;
 }
 
+.header-title {
+  font-size: 28px;
+  margin: 0;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+}
+h1 {
+  margin-bottom: 20px;
+  color: white; 
+}
 form {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
-
-form input[type="text"] {
-    padding: 8px;
-    margin-right: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
+input[type="text"], input[type="date"] {
+  padding: 6px 10px;
+  margin-right: 10px;
+  border: 2px solid #ffd166; /* 明るい黄色 */
+  border-radius: 6px;
+  font-size: 14px;
+  background-color: #fffaf0;
 }
-
-form button {
-    padding: 8px 12px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+button {
+  background-color: #06d6a0; /* ミントグリーン */
+  border: none;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
 }
-
-form button:hover {
-    background-color: #45a049;
+button:hover {
+  background-color: #04b28c;
 }
-
-ul {
-    list-style-type: none;
-    padding: 0;
+.board {
+  display: flex;
+  gap: 15px;
 }
-
-ul li {
-    margin: 10px 0;
-    padding: 10px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+.column {
+  background: #f0f4ff; /* パステルブルー */
+  border-radius: 10px;
+  padding: 10px;
+  flex: 1;
+  min-width: 220px;
 }
-
-ul li form {
-    display: inline;
+.column h2 {
+  margin-top: 0;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #118ab2; /* ブルーアクセント */
 }
-
-ul li button {
-    background-color: #f44336; /* 削除ボタンの色 */
+.card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  border-left: 5px solid #ffd166; /* 左にカラーポイント */
 }
-
-ul li button:hover {
-    background-color: #d32f2f;
+.card .todo-text {
+  font-size: 15px;
+  margin-bottom: 6px;
+  color: #073b4c;
 }
-
-ul li form input[type="text"] {
-    margin-left: 10px;
+.card .due-date {
+  font-size: 13px;
+  color: #6b778c;
 }

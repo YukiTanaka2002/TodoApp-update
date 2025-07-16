@@ -15,16 +15,17 @@ public class TodoDao {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    // todoListの取得
+    // 未完了TODOリストの取得
     public List<Todo> getTodoList() {
-        String sql = "SELECT id, task, completed FROM tasks";
+        String sql = "SELECT id, task, completed, due_date FROM tasks WHERE completed = false";
 
         // RowMapperを使って結果をTodoオブジェクトにマッピング
         RowMapper<Todo> rowMapper = (rs, rowNum) -> {
             Todo todo = new Todo();
             todo.setId(rs.getInt("id"));
-            todo.setTask(rs.getString("task"));
+            todo.setTodo(rs.getString("task"));
             todo.setCompleted(rs.getBoolean("completed"));
+            todo.setDueDate(rs.getString("due_date"));
             return todo;
         };
 
@@ -32,14 +33,14 @@ public class TodoDao {
         return jdbcTemplate.query(sql, rowMapper);
     }
     
-    // 完了したタスクのみを取得
+    // 完了したTODOのみを取得
     public List<Todo> getCompletedTodoList() {
         String sql = "SELECT id, task, completed FROM tasks WHERE completed = true";
 
         RowMapper<Todo> rowMapper = (rs, rowNum) -> {
             Todo todo = new Todo();
             todo.setId(rs.getInt("id"));
-            todo.setTask(rs.getString("task"));
+            todo.setTodo(rs.getString("task"));
             todo.setCompleted(rs.getBoolean("completed"));
             return todo;
         };
@@ -47,38 +48,40 @@ public class TodoDao {
         return jdbcTemplate.query(sql, rowMapper);
     }
 
-    // todoListの追加
-    public void addTodo(String taskDescription) {
-        // 新しいタスクを追加するSQL
-        String sql = "INSERT INTO tasks (task, completed) VALUES (?, ?)";
+    // TODOリストの追加
+    public void addTodo(String todo, String dueDate) {
+    	String sql = "INSERT INTO tasks (task, due_date, completed) VALUES (?, ?, ?)";
+    	jdbcTemplate.update(sql, todo, dueDate, false);
 
-        // jdbcTemplate.updateを使ってデータベースに追加
-        jdbcTemplate.update(sql, taskDescription, false); // デフォルトでcompletedはfalse
     }
 
- // タスクを完了にする
-    public void completeTodoByDescription(String taskDescription) {
-        String sql = "UPDATE tasks SET completed = true WHERE task = ?";
-        jdbcTemplate.update(sql, taskDescription);  // タスク内容で完了状態を更新
+ // TODOを完了にする
+    public void completeTodo(int todoId) {
+        String sql = "UPDATE tasks SET completed = true WHERE id = ?";
+        jdbcTemplate.update(sql, todoId);  // タスク内容で完了状態を更新
     }
 
-    // タスクを削除する
-    public void deleteTodoByDescription(String taskDescription) {
-        String sql = "DELETE FROM tasks WHERE task = ?";
-        jdbcTemplate.update(sql, taskDescription);  // タスク内容で削除
+    // TODOを削除する
+    public void deleteTodo(int todoId) {
+        String sql = "DELETE FROM tasks WHERE id = ?";
+        jdbcTemplate.update(sql, todoId);  // タスク内容で削除
     }
 
-    // タスクを編集する
-    public void updateTodoByDescription(String taskDescription, String newTaskDescription) {
-        String sql = "UPDATE tasks SET task = ? WHERE task = ?";
-        jdbcTemplate.update(sql, newTaskDescription, taskDescription);  // タスク内容で更新
+    // TODOを編集する
+    public void updateTodo(Todo inTodo) {
+    	int id = inTodo.getId();
+    	String todo = inTodo.getTodo();		//TODO内容
+    	String date = inTodo.getDueDate();	//期日
+    	
+        String sql = "UPDATE tasks SET task = ?, due_date = ? WHERE id = ?";
+        jdbcTemplate.update(sql, todo, date, id);  
     }
 
 
     
-    // 完了Todoを削除
-    public void deleteCompletedTodos() {
-        // 完了タスクを削除するSQL
+    // 完了TODOを削除
+    public void deleteCompletedTodo() {
+        // 完了TODOを削除するSQL
         String sql = "DELETE FROM tasks WHERE completed = true";
         jdbcTemplate.update(sql);
     }

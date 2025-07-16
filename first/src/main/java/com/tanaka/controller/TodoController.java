@@ -1,5 +1,6 @@
 package com.tanaka.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -8,95 +9,133 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tanaka.model.Todo;
+import com.tanaka.model.TodoSessionData;
 import com.tanaka.service.TodoService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class TodoController {
 
     @Autowired
     private TodoService todoService;
+    
+    //TODOリストセッションキー
+    private static final String SESSION_KEY_TODOLIST = "session_key_todo";
 
     // "/" にアクセスした場合、タスクリストを表示
     @GetMapping("/")
-    public String getTodoList(Model model) {
-        // 完了していないタスクのみを取得
-        List<Todo> todos = todoService.getTodoList().stream()
+    public String getTodoList(Model model, HttpSession session) {
+        // 完了していないTODOリストを取得
+        List<Todo> todoList = todoService.getTodoList().stream()
                                       .filter(todo -> !todo.isCompleted())
                                       .collect(Collectors.toList());
-
-        model.addAttribute("todos", todos);
-        return "todo"; // "todoList.html" を返す
+        
+        //セッションにTODOリストを保存する
+        session.setAttribute(SESSION_KEY_TODOLIST, todoList);
+        
+        model.addAttribute("todos", todoList);
+        
+        return "todo"; 
     }
 
 
-    // 新しいタスクを追加
-    @PostMapping("/todos")
-    public String addTodo(@RequestParam("taskDescription") String taskDescription) {
-        todoService.addTodo(taskDescription);
+    // 新しいTODOを追加
+    @PostMapping("/add-todo")
+    public String addTodo(@RequestParam("todo") String todo, @RequestParam("dueDate") String dueDate) {
+    	
+        todoService.addTodo(todo, dueDate);
+     
         return "redirect:/"; // タスク追加後にトップページ（"/"）にリダイレクト
     }
 
- // TODOの完了（POSTで送信）
+    
+    //TODOを検索
+    @PostMapping("/search")
+    @ResponseBody
+    public List<Todo> searchTodo(@RequestBody String todo, HttpSession session){
+    	List<Todo> searchTodoList = new ArrayList<>();
+    	
+    	//セッションからTODOリストを取得
+    	TodoSessionData todoSession = new TodoSessionData();
+    	todoSession.setTodoList(session.getAttribute(SESSION_KEY_TODOLIST));
+    	
+  
+    	//検索欄がnullの場合、TODOリストを再表示する
+    	if(todo == "") {
+    		searchTodoList = todoSession.getTodoList();
+    		return searchTodoList;
+    	}
+    	
+    	searchTodoList = todoService.searchTodo(todo, todoSession);
+    	
+    	
+    	return searchTodoList;
+    	
+    	
+    }
+ 
+    /**
+     * 完了処理
+     * @param todoId
+     */
     @PostMapping("/complete")
-    public String completeTodo(@RequestParam("taskDescription") String taskDescription) {
-        if (taskDescription == null || taskDescription.trim().isEmpty()) {
-            // タスク内容が空の場合のエラーハンドリング
-            return "redirect:/";  // 何もせずにトップページにリダイレクト
+    @ResponseBody
+    public void completeTodo(@RequestBody String todoId) {
+        if (todoId == null || todoId.trim().isEmpty()) {
+            // TODO内容が空の場合のエラーハンドリング
+            return;  
         }
-        todoService.completeTodoByDescription(taskDescription);  // タスク内容で完了処理
-        return "redirect:/";  // 完了後にトップページにリダイレクト
+        
+        // TODO完了処理
+        todoService.completeTodo(todoId);  
+        return ;  // 完了後にトップページにリダイレクト
     }
 
-
-    // 完了したTODOのみを取得
-    @GetMapping("/completed")
-    public String getCompletedTodoList(Model model) {
-        List<Todo> completedTodos = todoService.getCompletedTodoList();
-        model.addAttribute("todos", completedTodos);  // 完了タスクをビューに渡す
-        return "completed";  // "completed.html"に遷移
-    }
-
- // TODOを削除（POSTで送信）
+ 
+    /**
+     * 削除処理
+     * @param todoId
+     */
     @PostMapping("/delete")
-    public String deleteTodo(@RequestParam("taskDescription") String taskDescription) {
-        if (taskDescription == null || taskDescription.trim().isEmpty()) {
-            // タスク内容が空の場合のエラーハンドリング
-            return "redirect:/";  // 何もせずにトップページにリダイレクト
+    @ResponseBody
+    public void deleteTodo(@RequestBody String todoId) {
+        if (todoId == null || todoId.trim().isEmpty()) {
+        	
+            // TODOが空の場合のエラーハンドリング
+            return; 
         }
-        todoService.deleteTodoByDescription(taskDescription);  // タスク内容で削除
-        return "redirect:/"; // タスク削除後にトップページ（"/"）にリダイレクト
+        
+        // TODO削除
+        todoService.deleteTodo(todoId);  
+        return;
     }
 
     // 完了TODOを削除（POSTで送信）
     @PostMapping("/deleteCompleted")
-    public String deleteCompletedTodos() {
-        todoService.deleteCompletedTodos();  // 完了タスクを削除
+    public String deleteCompletedTodo() {
+        todoService.deleteCompletedTodo();  // 完了TODOを削除
         return "redirect:/";  // 削除後にトップページにリダイレクト
     }
 
- // TODOを編集（GETメソッドでフォーム表示）
-    @GetMapping("/edit")
-    public String editTodoForm(@RequestParam("taskDescription") String taskDescription, Model model) {
-        Todo todo = todoService.getTodoList().stream()
-                .filter(t -> t.getTask().equals(taskDescription))
-                .findFirst()
-                .orElse(null);
-        model.addAttribute("todo", todo);
-        return "edit"; // 編集フォームを表示
-    }
-
-    // 編集後に更新（POSTメソッドで更新）
-    @PostMapping("/edit")
-    public String editTodo(@RequestParam("taskDescription") String taskDescription,
-                            @RequestParam("newTaskDescription") String newTaskDescription) {
-        if (taskDescription == null || taskDescription.trim().isEmpty() || newTaskDescription == null || newTaskDescription.trim().isEmpty()) {
-            // タスク内容が空の場合のエラーハンドリング
-            return "redirect:/";  // 何もせずにトップページにリダイレクト
-        }
-        todoService.updateTodoByDescription(taskDescription, newTaskDescription);
+    /**
+     * 更新処理（編集時）
+     * @param todo
+     * @return
+     */
+    @PostMapping("/update")
+    @ResponseBody
+    public String updateTodo(@RequestBody Todo todo) {
+		/*  if (todo.todo == null || todo.todo().isEmpty() || todo.getDueDate() == null || newTodo.trim().isEmpty()) {
+		    // タスク内容が空の場合のエラーハンドリング
+		    return "";  // 何もせずにトップページにリダイレクト
+		}*/
+        todoService.updateTodo(todo);
         return "redirect:/"; // 編集後にトップページ（"/"）にリダイレクト
     }
 

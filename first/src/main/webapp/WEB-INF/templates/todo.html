@@ -1,198 +1,58 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<script th:src="@{/js/todo.js}"></script>
+<link rel="stylesheet" th:href="@{/css/style.css}" />
 <head>
-    <meta charset="UTF-8">
-    <title>TODOリスト</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: rgb(19, 236, 209);
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            box-sizing: border-box;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 600px;
-            background-color: #ffffff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 2em;
-            color: rgb(128, 128, 128);
-            margin-bottom: 20px;
-        }
-
-        form {
-            margin-bottom: 20px;
-        }
-
-        input[type="text"] {
-            padding: 10px;
-            width: 80%;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1em;
-            margin-bottom: 15px;
-            transition: border 0.3s ease-in-out;
-        }
-
-        input[type="text"]:focus {
-            border-color: #4CAF50;
-            outline: none;
-        }
-
-        button {
-            background-color: rgb(87, 181, 236);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 1em;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s ease-in-out;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-
-        a {
-            text-decoration: none;
-            color: #007BFF;
-            font-size: 1em;
-            margin-top: 15px;
-            display: block;
-            transition: color 0.3s ease-in-out;
-        }
-
-        a:hover {
-            color: #0056b3;
-        }
-
-        h2 {
-            font-size: 1.5em;
-            margin-top: 20px;
-            color: rgb(128, 128, 128);
-            
-        }
-
-        ul {
-            list-style: none;
-            padding: 0;
-            margin-top: 20px;
-        }
-
-        li {
-            background-color: #f9f9f9;
-            padding: 15px;
-            margin-bottom: 12px;
-            border-radius: 8px;
-            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background-color 0.3s ease-in-out;
-        }
-
-        li:hover {
-            background-color: #e7f5e4;
-        }
-
-        li span {
-            flex: 1;
-            text-align: left;
-            font-size: 1.1em;
-            color: #333;
-        }
-
-        li a {
-            font-size: 1em;
-            color: #4CAF50;
-            margin-left: 10px;
-            transition: color 0.3s ease-in-out;
-        }
-
-        li a:hover {
-            color: #388e3c;
-        }
-
-        .button-group {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-        }
-
-        .button-group a {
-            margin-left: 10px;
-        }
-
-        .complete-button {
-            color: #ffffff;
-            background-color: #f39c12;
-            padding: 5px 10px;
-            border-radius: 3px;
-            transition: background-color 0.3s ease-in-out;
-        }
-
-        .complete-button:hover {
-            background-color: #e67e22;
-        }
-
-    </style>
+<meta charset="UTF-8" />
+<title>TODOリスト</title>
 </head>
 <body>
+	
+	<header class="header">
+		<h1 class="header-title">TODOリスト</h1>
+	</header>
+	
+<div class="container">
 
-    <div class="container">
-        <h1>TODOリスト</h1>
+	  <!-- TODO追加フォーム -->
+	  <form th:action="@{/add-todo}" method="post">
+	    <label for="todo">新しいTODO:</label>
+	    <input type="text" id="todo" name="todo" required placeholder="例: 仕事がんばる" title="新しいタスクを追加してください">
+	    <input type="date" id="dueDate" name="dueDate" title="期日">
+	    <button type="submit">TODOを追加</button>
+	  </form>
 
-        <!-- タスクの追加フォーム -->
-        <form action="/todos" method="post">
-            <input type="text" id="taskDescription" name="taskDescription" required placeholder="新しいタスク">
-            <button type="submit">タスクを追加</button>
-        </form>
+	  <!-- TODO検索 -->
+	  <div>
+	    <label for="searchTodo">TODOを検索:</label>
+	    <input type="text" id="searchTodo" oninput="searchTodo()" placeholder="検索キーワードを入力" title="検索したいToDoのキーワードを入力してください">
+	    <ul id="todoList"></ul>
+	  </div>
 
-        <a href="/completed">完了したタスクを見る</a>
-
-        <h2>タスク一覧</h2>
-        <ul>
-            <!-- タスクのリストを表示 -->
-            <li th:each="todo : ${todos}">
-                <span th:text="${todo.task}">Task</span>
-                <div class="button-group">
-        <!-- タスクを完了するボタン (formで送信) -->
-			<form th:action="@{/complete}" method="post">
-    		<input type="hidden" name="id" th:value="${todo.id}" />
-   			 <input type="hidden" name="taskDescription" th:value="${todo.task}" />
-   			 <button type="submit" class="complete-button">完了</button>
-			</form>
-
-                    <!-- タスクを削除するボタン (formで送信) -->
-			<form th:action="@{/delete(id=${todo.id})}" method="post" style="display: inline;">
-    		<input type="hidden" name="taskDescription" th:value="${todo.task}" />
-    		<input type="hidden" name="_method" value="delete" />
-    		<button type="submit" class="delete-button">削除</button>
-			</form>
-
-<!-- タスクを編集するリンク (GETリクエスト) -->
-			<form th:action="@{/edit(id=${todo.id})}" method="get" style="display: inline;">
-    			<input type="hidden" name="taskDescription" th:value="${todo.task}" />
-    			<button type="submit" class="edit-button">編集</button>
-			</form>
-
-                </div>
-            </li>
-        </ul>
-    </div>
-
+	  <!-- TODO一覧 -->
+	  
+	   
+	  <div class="board">
+	    <div class="column">
+	      <h2>未完了</h2>
+			<div class="card" th:each="todo : ${todos}" th:attr="data-todo-id=${todo.id}">
+			  <div class="todo-text" th:text="${todo.todo}">TODO内容</div>
+			  <div class="due-date" th:text="'期日: ' + ${todo.dueDate}">期日</div>
+		  
+			  <div class="button-group">
+			   <button type="button" onclick="todoComplete(this)">完了</button>
+	           <button type="button" onclick="deleteTodo(this)">削除</button>
+	           <button type="button" onclick="editTodo(this)">編集</button>
+	   		   <button type="button" class="btnSave" onclick="updateTodo(this)" style="display:none">保存</button>
+	        </div>
+	      </div>
+	    </div>
+    
+	    <div class="column">
+	      <h2>完了</h2>
+	      <!-- 完了したTODOはここに移動する -->
+	    </div>
+	  </div>
+	</div>
 </body>
 </html>

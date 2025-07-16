@@ -100,14 +100,14 @@
     <div class="container">
         <h1>完了TODO</h1>
 
-        <!-- 完了タスクを削除するボタン -->
+        <!-- 完了TODOを削除するボタン -->
         <form action="/deleteCompleted" method="post">
             <button type="submit">完了したTODOをすべて削除</button>
         </form>
 
         <ul>
             <li th:each="todo : ${todos}">
-                <span th:text="${todo.task}">Task</span>
+                <span th:text="${todo.todo}">TODO</span>
             </li>
         </ul>
 
