@@ -22,15 +22,13 @@
 	  </form>
 
 	  <!-- TODO検索 -->
-	  <div>
-	    <label for="searchTodo">TODOを検索:</label>
-	    <input type="text" id="searchTodo" oninput="searchTodo()" placeholder="検索キーワードを入力" title="検索したいToDoのキーワードを入力してください">
-	    <ul id="todoList"></ul>
-	  </div>
+<!--	  <div>-->
+<!--	    <label for="searchTodo">TODOを検索:</label>-->
+<!--	    <input type="text" id="searchTodo" oninput="searchTodo()" placeholder="検索キーワードを入力" title="検索したいToDoのキーワードを入力してください">-->
+<!--	    <ul id="todoList"></ul>-->
+<!--	  </div>-->
 
 	  <!-- TODO一覧 -->
-	  
-	   
 	  <div class="board">
 	    <div class="column">
 	      <h2>未完了</h2>
@@ -47,12 +45,20 @@
 	      </div>
 	    </div>
     
-	    <div class="column">
-	      <h2>完了</h2>
-	      <!-- 完了したTODOはここに移動する -->
-	    </div>
-	  </div>
-	</div>
+   <div class="column">
+      <h2>完了</h2>
+      <div class="card" th:each="todo : ${completedTodos}" th:attr="data-todo-id=${todo.id}">
+        <div class="todo-text" th:text="${todo.todo}">TODO内容</div>
+        <div class="due-date" th:text="'期日: ' + ${todo.dueDate}">期日</div>
+        <div class="button-group">
+          <!-- 完了済みは「完了」ボタン非表示にしておく -->
+          <button type="button" style="display:none;">完了</button>
+          <button type="button" onclick="deleteTodo(this)">削除</button>
+          <button type="button" onclick="editTodo(this)">編集</button>
+          <button type="button" class="btnSave" onclick="updateTodo(this)" style="display:none">保存</button>
+        </div>
+      </div>
+    </div>
 	<script th:src="@{/js/todo.js}"></script>
 </body>
 </html>

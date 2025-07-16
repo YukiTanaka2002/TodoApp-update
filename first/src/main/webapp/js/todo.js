@@ -98,24 +98,28 @@ async function todoComplete(btn) {
 
     
 /**
- * （編集時）保存処理
+ * 保存処理
  */
 
 　async function updateTodo(button) {
-	　const card = button.closest(".card");
-	  //TODOカードが取得できない場合
+	  // クリックされた保存ボタンの親カード要素を取得
+	  const card = button.closest(".card");
+	  
+	  // TODOカードが取得できない場合はエラーをログに出して処理中断
 	  if (!card) {
 	    console.error("カードが見つかりません");
 	    return;
 	  }
 	
+	  // TODOのID、編集中のTODOテキストと期日の入力値を取得
 	  const id = card.getAttribute("data-todo-id");
 	  const todoInput = card.querySelector(".edit-todo");
 	  const dateInput = card.querySelector(".edit-date");
 	  const todo = todoInput.value;
 	  const dueDate = dateInput.value;
-
+	
 	  try {
+	    // サーバーへ更新内容をJSONで送信するPOSTリクエストを送る
 	    await fetch("/update", {
 	      method: "POST",
 	      headers: {
@@ -124,28 +128,30 @@ async function todoComplete(btn) {
 	      body: JSON.stringify({ id, todo, dueDate }),
 	    });
 	  } catch (error) {
+	    // 通信や更新時にエラーが発生したらコンソールに表示
 	    console.error("更新エラー:", error);
 	  }
-
-	  // 保存ボタンを非表示にする（このカードだけ対象）
+	
+	  // 更新完了後、保存ボタンを非表示にする（対象のカード内のみ）
 	  const saveButton = card.querySelector(".btnSave");
 	  if (saveButton) saveButton.style.display = "none";
-
-	  // 表示モード切り替え（TODO内容）
+	
+	  // 編集モードから表示モードに切り替える（TODOテキスト部分）
 	  const todoDiv = document.createElement("div");
 	  todoDiv.classList.add("todo-text");
 	  todoDiv.textContent = todo;
 	  todoInput.replaceWith(todoDiv);
-
-	  // 表示モード切り替え（期日）
+	
+	  // 編集モードから表示モードに切り替える（期日部分）
 	  const dateDiv = document.createElement("div");
 	  dateDiv.classList.add("due-date");
 	  dateDiv.textContent = "期日: " + dueDate;
 	  dateInput.replaceWith(dateDiv);
-	  
+	
+	  // 期日が今日のTODOを赤くする関数を呼び出して再判定
 	  highlightTodayTodos();
-	  
-	}
+}
+
 	
 　
 /**
@@ -166,7 +172,7 @@ function highlightTodayTodos() {
     const dueDateText = dueDateElem.textContent.replace("期日: ", "").trim();
 
     // 期日が今日と一致する場合は背景色を赤に、それ以外は元の色に戻す
-    if (dueDateText === today) {
+    if (dueDateText <= today) {
       card.style.backgroundColor = "#ffcccc"; // 今日が期日のTODOを目立たせる
     } else {
       card.style.backgroundColor = ""; // 今日じゃない場合は色をリセット
@@ -175,55 +181,7 @@ function highlightTodayTodos() {
 }
 
 
+	
 // ページ読み込み時に呼び出す
 document.addEventListener("DOMContentLoaded", highlightTodayTodos);
-
-
-	
-//async function searchTodo() {
-//  const searchValue = document.querySelector("#searchTodo").value;
-//  const incompleteColumn = document.querySelector(".board .column");
-//
-//  try {
-//    const response = await fetch("/search", {
-//      method: "POST",
-//      headers: { "Content-Type": "application/json" },
-//      body: JSON.stringify(searchValue),
-//    });
-//    const todos = await response.json();
-//
-//    // 既存のカード・メッセージを全部消す
-//    incompleteColumn.querySelectorAll(".card, .no-todo-message").forEach(el => el.remove());
-//
-//    if (todos.length === 0) {
-//      const message = document.createElement("div");
-//      message.textContent = "該当するTODOはありません";
-//      message.classList.add("no-todo-message");
-//      message.style.padding = "10px";
-//      incompleteColumn.appendChild(message);
-//      return;
-//    }
-//
-//    todos.forEach(todo => {
-//      const card = document.createElement("div");
-//      card.classList.add("card");
-//      card.setAttribute("data-todo-id", todo.id);
-//
-//      const todoText = document.createElement("div");
-//      todoText.classList.add("todo-text");
-//      todoText.textContent = todo.todo;
-//      card.appendChild(todoText);
-//
-//      const dueDate = document.createElement("div");
-//      dueDate.classList.add("due-date");
-//      dueDate.textContent = todo.dueDate ? `期日: ${todo.dueDate}` : "期日: なし";
-//      card.appendChild(dueDate);
-//
-//      incompleteColumn.appendChild(card);
-//    });
-//
-//  } catch (error) {
-//    console.error("検索エラー:", error);
-//  }
-//}
 

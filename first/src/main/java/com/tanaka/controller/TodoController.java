@@ -1,6 +1,5 @@
 package com.tanaka.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tanaka.model.Todo;
-import com.tanaka.model.TodoSessionData;
 import com.tanaka.service.TodoService;
 
 import jakarta.servlet.http.HttpSession;
@@ -32,14 +30,18 @@ public class TodoController {
     @GetMapping("/")
     public String getTodoList(Model model, HttpSession session) {
         // 完了していないTODOリストを取得
-        List<Todo> todoList = todoService.getTodoList().stream()
+        List<Todo> incompleteTodoList  = todoService.getTodoList().stream()
                                       .filter(todo -> !todo.isCompleted())
                                       .collect(Collectors.toList());
         
-        //セッションにTODOリストを保存する
-        session.setAttribute(SESSION_KEY_TODOLIST, todoList);
+        // 完了TODOリストを取得
+        List<Todo> completedTodoList = todoService.getCompletedTodoList();
         
-        model.addAttribute("todos", todoList);
+        //セッションに未完了TODOリストを保存する
+        session.setAttribute(SESSION_KEY_TODOLIST, incompleteTodoList );
+        
+        model.addAttribute("todos", incompleteTodoList);
+        model.addAttribute("completedTodos", completedTodoList);
         
         return "todo"; 
     }
@@ -55,31 +57,6 @@ public class TodoController {
     }
 
     
-    //TODOを検索
-    @PostMapping("/search")
-    @ResponseBody
-    public List<Todo> searchTodo(@RequestBody String todo, HttpSession session){
-    	List<Todo> searchTodoList = new ArrayList<>();
-    	
-    	//セッションからTODOリストを取得
-    	TodoSessionData todoSession = new TodoSessionData();
-    	todoSession.setTodoList(session.getAttribute(SESSION_KEY_TODOLIST));
-    	
-  
-    	//検索欄がnullの場合、TODOリストを再表示する
-    	if(todo == "") {
-    		searchTodoList = todoSession.getTodoList();
-    		return searchTodoList;
-    	}
-    	
-    	searchTodoList = todoService.searchTodo(todo, todoSession);
-    	
-    	
-    	return searchTodoList;
-    	
-    	
-    }
- 
     /**
      * 完了処理
      * @param todoId
@@ -116,13 +93,6 @@ public class TodoController {
         return;
     }
 
-    // 完了TODOを削除（POSTで送信）
-    @PostMapping("/deleteCompleted")
-    public String deleteCompletedTodo() {
-        todoService.deleteCompletedTodo();  // 完了TODOを削除
-        return "redirect:/";  // 削除後にトップページにリダイレクト
-    }
-
     /**
      * 更新処理（編集時）
      * @param todo
@@ -138,5 +108,30 @@ public class TodoController {
         todoService.updateTodo(todo);
         return "redirect:/"; // 編集後にトップページ（"/"）にリダイレクト
     }
+    
+//  //TODOを検索
+//  @PostMapping("/search")
+//  @ResponseBody
+//  public List<Todo> searchTodo(@RequestBody String todo, HttpSession session){
+//  	List<Todo> searchTodoList = new ArrayList<>();
+//  	
+//  	//セッションからTODOリストを取得
+//  	TodoSessionData todoSession = new TodoSessionData();
+//  	todoSession.setTodoList(session.getAttribute(SESSION_KEY_TODOLIST));
+//  	
+//
+//  	//検索欄がnullの場合、TODOリストを再表示する
+//  	if(todo == "") {
+//  		searchTodoList = todoSession.getTodoList();
+//  		return searchTodoList;
+//  	}
+//  	
+//  	searchTodoList = todoService.searchTodo(todo, todoSession);
+//  	
+//  	
+//  	return searchTodoList;
+//  	
+//  	
+//  }
 
 }

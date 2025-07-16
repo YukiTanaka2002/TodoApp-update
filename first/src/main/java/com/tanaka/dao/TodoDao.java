@@ -35,13 +35,14 @@ public class TodoDao {
     
     // 完了したTODOのみを取得
     public List<Todo> getCompletedTodoList() {
-        String sql = "SELECT id, task, completed FROM tasks WHERE completed = true";
+        String sql = "SELECT id, task, completed, due_date FROM tasks WHERE completed = true";
 
         RowMapper<Todo> rowMapper = (rs, rowNum) -> {
             Todo todo = new Todo();
             todo.setId(rs.getInt("id"));
             todo.setTodo(rs.getString("task"));
             todo.setCompleted(rs.getBoolean("completed"));
+            todo.setDueDate(rs.getString("due_date"));
             return todo;
         };
 
