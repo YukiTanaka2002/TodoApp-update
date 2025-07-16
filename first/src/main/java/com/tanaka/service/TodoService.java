@@ -15,9 +15,6 @@ public class TodoService {
 
     @Autowired
     private TodoDao todoDao;
-
-    //TODOリストキャッシュ用
-    //private List<Todo> todoList= new ArrayList<>();
     
     // TODOリストを取得
     public List<Todo> getTodoList() {
@@ -114,9 +111,9 @@ public class TodoService {
     	//キャッシュしたTODOリストから一致するタスクを取得
     	for(Todo todoJoh : todoList) {
     		String todo = todoJoh.getTodo();
-    		
+
     		if(searchTodo.equals(todo)) {
-    			todoJoh.setTodo(searchTodo);
+    			todoJoh.setTodo(searchTodo.trim());
     			searchTodoList.add(todoJoh);
     		}
     	}

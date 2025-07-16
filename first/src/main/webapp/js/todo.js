@@ -98,7 +98,7 @@ async function todoComplete(btn) {
 
     
 /**
- * 保存処理（編集時）
+ * （編集時）保存処理
  */
 
 　async function updateTodo(button) {
@@ -143,40 +143,87 @@ async function todoComplete(btn) {
 	  dateDiv.textContent = "期日: " + dueDate;
 	  dateInput.replaceWith(dateDiv);
 	  
+	  highlightTodayTodos();
+	  
 	}
 	
-//	async function searchTodo() {
-//  const searchTodo = document.querySelector("#searchTodo").value;
-//  const list = document.getElementById("todoList");
+　
+/**
+ * すべてのTODOカードをチェックして、
+ * 「期日が今日」のものを赤くする
+ */
+function highlightTodayTodos() {
+  // 今日の日付を「YYYY-MM-DD」形式で取得
+  const today = new Date().toISOString().split('T')[0];
+
+  // すべてのTODOカードをループ処理
+  document.querySelectorAll(".card").forEach(card => {
+    // 各カードから期日表示の要素を取得
+    const dueDateElem = card.querySelector(".due-date");
+    if (!dueDateElem) return; // 期日が存在しない場合はスキップ
+
+    // 「期日: YYYY-MM-DD」の形式から日付だけを抜き出す
+    const dueDateText = dueDateElem.textContent.replace("期日: ", "").trim();
+
+    // 期日が今日と一致する場合は背景色を赤に、それ以外は元の色に戻す
+    if (dueDateText === today) {
+      card.style.backgroundColor = "#ffcccc"; // 今日が期日のTODOを目立たせる
+    } else {
+      card.style.backgroundColor = ""; // 今日じゃない場合は色をリセット
+    }
+  });
+}
+
+
+// ページ読み込み時に呼び出す
+document.addEventListener("DOMContentLoaded", highlightTodayTodos);
+
+
+	
+//async function searchTodo() {
+//  const searchValue = document.querySelector("#searchTodo").value;
+//  const incompleteColumn = document.querySelector(".board .column");
 //
 //  try {
 //    const response = await fetch("/search", {
 //      method: "POST",
-//      headers: {
-//        "Content-Type": "application/json",
-//      },
-//      body: JSON.stringify(searchTodo), // ★ここを文字列に戻すだけ！
+//      headers: { "Content-Type": "application/json" },
+//      body: JSON.stringify(searchValue),
 //    });
+//    const todos = await response.json();
 //
-//    const data = await response.json();
+//    // 既存のカード・メッセージを全部消す
+//    incompleteColumn.querySelectorAll(".card, .no-todo-message").forEach(el => el.remove());
 //
-//    // 表示を初期化
-//    list.innerHTML = "";
-//
-//    // 結果を表示
-//    if (data.length === 0) {
-//      const li = document.createElement("li");
-//      li.textContent = "該当するTODOが見つかりませんでした。";
-//      list.appendChild(li);
-//    } else {
-//      data.forEach(todo => {
-//        const li = document.createElement("li");
-//        li.innerHTML = `<strong>${todo.todo}</strong>（期日: ${todo.dueDate}）`;
-//        list.appendChild(li);
-//      });
+//    if (todos.length === 0) {
+//      const message = document.createElement("div");
+//      message.textContent = "該当するTODOはありません";
+//      message.classList.add("no-todo-message");
+//      message.style.padding = "10px";
+//      incompleteColumn.appendChild(message);
+//      return;
 //    }
+//
+//    todos.forEach(todo => {
+//      const card = document.createElement("div");
+//      card.classList.add("card");
+//      card.setAttribute("data-todo-id", todo.id);
+//
+//      const todoText = document.createElement("div");
+//      todoText.classList.add("todo-text");
+//      todoText.textContent = todo.todo;
+//      card.appendChild(todoText);
+//
+//      const dueDate = document.createElement("div");
+//      dueDate.classList.add("due-date");
+//      dueDate.textContent = todo.dueDate ? `期日: ${todo.dueDate}` : "期日: なし";
+//      card.appendChild(dueDate);
+//
+//      incompleteColumn.appendChild(card);
+//    });
 //
 //  } catch (error) {
 //    console.error("検索エラー:", error);
 //  }
 //}
+
