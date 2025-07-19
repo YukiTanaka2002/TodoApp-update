@@ -53,25 +53,25 @@ public class TodoService {
     }
     
  // TODOを完了にする
-    public void completeTodo(String todoId) {
+    public void completeTodo(String strTodoId) {
     	//ダブルクォートを削除する
-    	todoId = todoId.replace("\"", "");
+    	strTodoId = strTodoId.replace("\"", "");
 
     	//intに変換する
-    	int _todoId = Integer.parseInt(todoId);
+    	int todoId = Integer.parseInt(strTodoId);
     	
-        todoDao.completeTodo(_todoId);  // Dao層で完了処理
+        todoDao.completeTodo(todoId);  // Dao層で完了処理
     }
 
     // TODOを削除する
-    public void deleteTodo(String todoId) {
+    public void deleteTodo(String strTodoId) {
     	
     	//ダブルクォートを削除する
-    	todoId = todoId.replace("\"", "");
+    	strTodoId = strTodoId.replace("\"", "");
 
     	//intに変換する
-    	int _todoId = Integer.parseInt(todoId);
-        todoDao.deleteTodo(_todoId);  // Dao層で削除処理
+    	int todoId = Integer.parseInt(strTodoId);
+        todoDao.deleteTodo(todoId);  // Dao層で削除処理
     }
 
     // TODOを編集する
@@ -109,12 +109,12 @@ public class TodoService {
     	List<Todo> todoList = session.getTodoList();
     	
     	//キャッシュしたTODOリストから一致するタスクを取得
-    	for(Todo todoJoh : todoList) {
-    		String todo = todoJoh.getTodo();
+    	for(Todo todo : todoList) {
+    		String strTodo = todo.getTodo();
 
-    		if(searchTodo.equals(todo)) {
-    			todoJoh.setTodo(searchTodo.trim());
-    			searchTodoList.add(todoJoh);
+    		if(searchTodo.equals(strTodo)) {
+    			todo.setTodo(searchTodo.trim());
+    			searchTodoList.add(todo);
     		}
     	}
     	
